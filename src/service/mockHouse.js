@@ -134,3 +134,48 @@ export const filterHousesByLocation = async (location) => {
     return [];
   }
 };
+
+export const createRealEstateListing = async (formData) => {
+  try {
+    await simulateDelay();
+    
+    const houses = getHousesFromStorage();
+    
+    // Convert form data to match existing house structure
+    const newHouse = {
+      id: `house_${Date.now()}`,
+      title: `${formData.propertyType} for Sale`,
+      description: formData.description,
+      location: formData.address,
+      price: parseFloat(formData.price),
+      bedrooms: parseInt(formData.bedrooms),
+      bathrooms: parseFloat(formData.bathrooms),
+      squareFootage: parseInt(formData.squareFootage),
+      propertyType: formData.propertyType,
+      features: [
+        `${formData.bedrooms} Bedrooms`,
+        `${formData.bathrooms} Bathrooms`,
+        `${formData.squareFootage} sq ft`
+      ],
+      houseImages: formData.images.length > 0 
+        ? formData.images.map((_, index) => `https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=500&h=300&fit=crop&v=${index}`)
+        : ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=500&h=300&fit=crop"],
+      owner: formData.userEmail, // Use the email provided by the user
+      createdAt: new Date().toISOString().split('T')[0],
+      status: "available",
+      isNewListing: true
+    };
+    
+    houses.push(newHouse);
+    saveHousesToStorage(houses);
+    
+    return { 
+      id: newHouse.id,
+      success: true,
+      message: "Property listed successfully!"
+    };
+  } catch (error) {
+    console.error('Error creating real estate listing:', error);
+    throw error;
+  }
+};

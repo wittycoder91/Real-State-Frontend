@@ -15,6 +15,7 @@ import AllHouseList from "./app/home/AllHouseList";
 import AdminDashboard from "./app/admin/AdminDashboard";
 import HouseCardList from "./app/home/HouseCardList";
 import CreateNewHouseForm from "./app/admin/CreateNewHouseForm";
+import AddRealEstateForm from "./components/AddRealEstateForm";
 
 import HouseDetails from "./pages/HouseDetails/HouseDetails";
 import { ProtectedRoute } from "./app/admin/ProtectedRoute";
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
             element: <HouseDetails />,
           },
         ],
+      },
+      {
+        path: "/add-real-estate",
+        element: <AddRealEstateForm />,
       },
       {
         path: "house/:id/payment",
