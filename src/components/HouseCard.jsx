@@ -1,6 +1,6 @@
 import { PiArrowCircleUpRight } from "react-icons/pi";
 import { Badge } from "@/components/ui/badge";
-import { formatIndianRupee } from "@/lib/utils";
+import { formatCurrency } from "@/lib/utils";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Button } from "./ui/button";
@@ -9,7 +9,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 const HouseCard = ({
-  id,
+  id,  
   houseBadge,
   houseCoverImage,
   houseName,
@@ -19,7 +19,7 @@ const HouseCard = ({
   let location = useLocation();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const queryClient = useQueryClient();
-  const { mutate, isPending } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: (id) => deleteHouse(id),
     mutationKey: "deleteHouse",
     onSuccess: () => {
@@ -32,6 +32,7 @@ const HouseCard = ({
     e.preventDefault();
     mutate(id);
   };
+
   return (
     <Link
       to={`/house/${id}`}
@@ -42,10 +43,7 @@ const HouseCard = ({
           {houseBadge}
         </Badge>
         <img
-          src={
-            houseCoverImage ||
-            "https://images.unsplash.com/photo-1564078516393-cf04bd966897?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjJ8fGx1eHVyeSUyMGhvdXNlfGVufDB8fDB8fHww"
-          }
+          src={houseCoverImage}
           className="rounded -z-10 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
           alt={`${houseName} cover image || house image`}
         />
@@ -76,7 +74,7 @@ const HouseCard = ({
         <div className="flex justify-between items-center">
           <h3 className="text-lg font-semibold">{houseName}</h3>
           <p className="text-sm font-semibold">
-            {formatIndianRupee(housePrice)}
+            {formatCurrency(housePrice)}
           </p>
         </div>
         <p className="text-sm">{houseAddress}</p>

@@ -12,7 +12,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { formatIndianRupee } from "@/lib/utils";
+import { formatCurrency } from "@/lib/utils";
 import PaymentSuccess from "./PaymentSuccess";
 const formSchema = z.object({
   email: z.string().email({
@@ -102,7 +102,7 @@ const PaymentForm = ({ price }) => {
             <div className="flex items-center justify-between">
               <p className="text-sm font-medium text-gray-900">Total</p>
               <p className="text-2xl font-semibold text-gray-900 font-space">
-                {formatIndianRupee(price || 5000)}
+                {formatCurrency(price || 5000)}
               </p>
             </div>
 

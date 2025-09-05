@@ -24,8 +24,8 @@ const Service = () => {
 
       <div className="flex flex-col md:flex-row justify-between mt-10 gap-5">
         <img
-          src="https://plus.unsplash.com/premium_photo-1682000405311-e89be5733e9c?q=80&w=2056&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt=""
+          src="/public/images/image2.jpg"
+          alt="Image"
           className="w-full md:w-[60%]  object-cover object-top rounded-xl"
         />
 

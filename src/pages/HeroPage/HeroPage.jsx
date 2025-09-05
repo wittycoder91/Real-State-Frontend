@@ -37,7 +37,7 @@ const HeroPage = () => {
 
       <div className="px-4">
         <img
-          src="https://plus.unsplash.com/premium_photo-1661883964999-c1bcb57a7357?q=80&w=2028&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src="/public/images/image1.jpg"
           className="rounded-3xl h-72 md:h-80 w-full lg:w-[35rem] lg:h-[25rem] xl:w-[40rem] xl:h-[25rem] object-cover"
           alt="home image"
         />

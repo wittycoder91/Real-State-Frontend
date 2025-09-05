@@ -36,7 +36,7 @@ const HouseCardList = ({ limit = 0 }) => {
               houseAddress={house.location}
               houseCoverImage={
                 house?.houseImages?.[0] ||
-                "https://images.unsplash.com/photo-1564078516393-cf04bd966897?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjJ8fGx1eHVyeSUyMGhvdXNlfGVufDB8fDB8fHww"
+                "/public/images/nophoto.jpg"
               }
               houseName={house.title}
               houseBadge={house.status || "For Rent"}

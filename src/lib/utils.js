@@ -4,8 +4,8 @@ import { twMerge } from "tailwind-merge";
 export function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
-export function formatIndianRupee(number) {
-  var rupeeSymbol = "₹";
+export function formatCurrency(number) {
+  var rupeeSymbol = "$";
   var formattedNumber = parseFloat(number)
     .toFixed(2)
     .replace(/\d(?=(\d{3})+\.)/g, "$&,");

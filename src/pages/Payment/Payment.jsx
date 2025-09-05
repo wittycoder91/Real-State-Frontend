@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import Logo from "@/components/Logo";
 import PaymentForm from "./PaymentForm";
-import { formatIndianRupee } from "@/lib/utils";
+import { formatCurrency } from "@/lib/utils";
 
 const Payment = () => {
   const house = useSelector((state) => state.house.houseData);
@@ -29,7 +29,7 @@ const Payment = () => {
                 {house.houseName || "Simple House"}
               </h3>
               <p className="text-sm font-semibold">
-                {formatIndianRupee(house.rentalOfferPrice || 5000)}
+                {formatCurrency(house.rentalOfferPrice || 5000)}
               </p>
             </div>
             <p className="text-sm">{house.address || "Paris, France"}</p>

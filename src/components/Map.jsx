@@ -18,26 +18,46 @@ const createClusterCustomIcon = function (cluster) {
 };
 
 const Map = ({ markers }) => {
-  const { geocode, popUp } = markers[0];
-  if (!geocode?.[0] || !geocode?.[1]) return;
-  return (
-    <MapContainer center={geocode} zoom={10}>
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+  if (!markers || markers.length === 0) {
+    return <div className="h-64 bg-gray-200 rounded-lg flex items-center justify-center">
+      <p className="text-gray-500">No location data available</p>
+    </div>;
+  }
 
-      <MarkerClusterGroup
-        chunkedLoading
-        iconCreateFunction={createClusterCustomIcon}
+  const { geocode, popUp } = markers[0];
+  if (!geocode?.[0] || !geocode?.[1]) {
+    return <div className="h-64 bg-gray-200 rounded-lg flex items-center justify-center">
+      <p className="text-gray-500">Invalid coordinates</p>
+    </div>;
+  }
+
+  console.log('Map component - rendering with:', { geocode, popUp });
+
+  return (
+    <div className="h-64 w-full">
+      <MapContainer 
+        center={geocode} 
+        zoom={15} 
+        style={{ height: '100%', width: '100%' }}
+        className="rounded-lg"
       >
-        {markers.map((marker, index) => (
-          <Marker position={geocode} key={index} icon={customIcon}>
-            <Popup>{popUp}</Popup>
-          </Marker>
-        ))}
-      </MarkerClusterGroup>
-    </MapContainer>
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+
+        <MarkerClusterGroup
+          chunkedLoading
+          iconCreateFunction={createClusterCustomIcon}
+        >
+          {markers.map((marker, index) => (
+            <Marker position={marker.geocode} key={index} icon={customIcon}>
+              <Popup>{marker.popUp}</Popup>
+            </Marker>
+          ))}
+        </MarkerClusterGroup>
+      </MapContainer>
+    </div>
   );
 };
 export default Map;

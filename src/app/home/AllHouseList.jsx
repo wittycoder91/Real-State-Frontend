@@ -1,12 +1,13 @@
 import HouseCard from "@/components/HouseCard";
-import { fetchHouseList } from "@/service/mockHouse";
+import { getActiveRealEstate } from "@/service/realEstateService";
 import { useQuery } from "@tanstack/react-query";
 import HouseCardSkeleton from "./HouseCardSkeleton";
+import { getImageUrl } from "@/utils/imageUtils";
 
 const AllHouseList = () => {
   const { isPending, error, data } = useQuery({
-    queryKey: ["fetchHouseList"],
-    queryFn: fetchHouseList,
+    queryKey: ["fetchActiveRealEstate"],
+    queryFn: getActiveRealEstate,
   });
 
   const renderHouseCardSkeleton = Array.from({ length: 4 }).map((_, index) => (
@@ -25,18 +26,18 @@ const AllHouseList = () => {
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-8 gap-x-6 my-5">
       {isPending
         ? renderHouseCardSkeleton
-        : data?.map((house) => (
+        : data?.data?.map((house) => (
             <HouseCard
-              id={house.id}
-              houseAddress={house.location}
+              id={house._id}
+              houseAddress={house.address}
               houseCoverImage={
-                house?.houseImages?.[0] ||
-                "https://images.unsplash.com/photo-1564078516393-cf04bd966897?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjJ8fGx1eHVyeSUyMGhvdXNlfGVufDB8fDB8fHww"
+                getImageUrl(house?.images?.[0]) ||
+                "/public/images/nophoto.jpg"
               }
-              houseName={house.title}
-              houseBadge={house.status || "For Rent"}
+              houseName={`${house.propertyType} - ${house.bedrooms} bed, ${house.bathrooms} bath`}
+              houseBadge={house.status ? "Available" : "Unavailable"}
               housePrice={house.price}
-              key={house.id}
+              key={house._id}
             />
           ))}
     </div>
