@@ -45,7 +45,7 @@ const HouseCard = ({
         <img
           src={houseCoverImage}
           className="rounded -z-10 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
-          alt={`${houseName} cover image || house image`}
+          alt='House Photo'
         />
         {isAuthenticated && location.pathname.split("/")?.[1] === "admin" ? (
           <Button size="icon" className="z-50" onClick={deleteHouseHandler}>

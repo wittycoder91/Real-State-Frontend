@@ -76,10 +76,10 @@ const ContactForm = ({ realEstateId }) => {
       setValidationError("Please upload at least one image.");
       return false;
     }
-    if (formData.images.length > 2) {
-      setValidationError("Please upload maximum 2 images.");
-      return false;
-    }
+    // if (formData.images.length > 2) {
+    //   setValidationError("Please upload maximum 2 images.");
+    //   return false;
+    // }
     return true;
   };
 
@@ -185,7 +185,7 @@ const ContactForm = ({ realEstateId }) => {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Upload Images (1-2 images) *
+            Upload Images *
           </label>
           
           {/* Custom File Upload Area */}
@@ -220,7 +220,7 @@ const ContactForm = ({ realEstateId }) => {
                   <span className="font-semibold">Click to upload</span> images
                 </p>
                 <p className="text-xs text-gray-500">
-                  PNG, JPG, GIF up to 10MB each (max 2 images)
+                  PNG, JPG, GIF up to 10MB each
                 </p>
               </div>
             </label>
@@ -229,7 +229,7 @@ const ContactForm = ({ realEstateId }) => {
           {formData.images.length > 0 && (
             <div className="mt-4">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Uploaded Images ({formData.images.length}/2)
+                Uploaded Images {formData.images.length}
               </label>
               <div className="grid grid-cols-2 gap-4">
                 {formData.images.map((image, index) => (
